@@ -55,9 +55,9 @@ scipy==1.4.1
 Shapely==1.7.0
 six==1.14.0
 sklearn==0.0
-tensorboard==2.0.0
-tensorflow==2.0.0
-tensorflow-estimator==2.0.0
+tensorboard==2.0.1
+tensorflow==2.0.1
+tensorflow-estimator==2.0.1
 termcolor==1.1.0
 tqdm==4.43.0
 -e git+https://github.com/YHallouard/UMask.git@3d77dc624520d6e1442d18f116cd35e5129d2aff#egg=UMask
