@@ -13,6 +13,21 @@ Build the docker image and start the docker container :
 bash start.sh
 ```
 
+/!\ If you download the docker image on docker
+```
+docker pull yhallouard/cpss:latest
+```
+You have to run a container this way :
+```
+docker run -d -e PYTHONUNBUFFERED=1 -p 5000:5000   --name='cpss'   -v $PWD:/app/Drop_images yhallouard/cpss:latest
+```
+Obviously name, environement and port can by changed. But you have to mount a empty volume to /app/Drop_images this is were you'll put your pictures and will get back your results. You'll communicate with the container through this folder.
+
+
+
+
+
+
 ## How to use it ?
 
 Firstly, drop your images in the Drop_images folder.
@@ -30,13 +45,13 @@ You will get a plot to see how the API work on your picture. (This plot is also 
 ##### On web browser -- Get one WKT vector
 This route (http://localhost:5000/predict_wkt)  will lead you to that page where you also have to provide the api with the name of one picture.
 ![40% center](README_pic/predict_wkt_browser.png)  
-You'll get a WKT vector of the car park detected on this picture. (This wkt vector is saved in the prediction.txt file in the results folder)
+You'll get a WKT vector of the car park detected on this picture. (This wkt vector is saved in the prediction.txt file in the Drop_images folder)
 ![40% center](README_pic/predict_wkt_browser2.png)
 
 ##### On web browser -- Get WKT vector for a batche of pictures
 This route (http://localhost:5000/predict/batches) will lead you to that page where you'll have to put the path of the folder containing your pictures. ex: Drop_images/pic1 or Drop_images.
 ![40% center](README_pic/predict_wkt_browser3.png)  
-You'll get a WKT vector of the car park detected on each picture. (WKT vectors are saved in the prediction.txt file in the results folder)
+You'll get a WKT vector of the car park detected on each picture. (WKT vectors are saved in the prediction.txt file in the Drop_images folder)
 ![40% center](README_pic/predict_wkt_browser4.png)
 
 ### Command line

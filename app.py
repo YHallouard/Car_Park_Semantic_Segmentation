@@ -217,7 +217,7 @@ def predict():
             I = image[0]
             p = preds[0]
 
-            with open('results/temp.png', 'wb') as handle:
+            with open('Drop_images/temp.png', 'wb') as handle:
                 response = requests.get('http://localhost:5000/plot', stream=True)
 
                 if not response.ok:
@@ -262,7 +262,7 @@ def predict():
             I = image[0]
             p = preds[0]
 
-            with open('results/temp.png', 'wb') as handle:
+            with open('Drop_images/temp.png', 'wb') as handle:
                 response = requests.get('http://localhost:5000/plot', stream=True)
 
                 if not response.ok:
@@ -324,7 +324,7 @@ def predict_wk():
             # indicate that the request was a success
             data["success"] = True
 
-            with open('results/predictions.txt', 'w') as outfile:
+            with open('Drop_images/predictions.txt', 'w') as outfile:
                 json.dump(data, outfile)
 
             # return the data dictionary as a JSON response
@@ -355,7 +355,7 @@ def predict_wk():
             data["success"] = True
 
 
-            with open('results/predictions.txt', 'w') as outfile:
+            with open('Drop_images/predictions.txt', 'w') as outfile:
                 json.dump(data, outfile)
 
             # return the data dictionary as a JSON response
@@ -385,7 +385,10 @@ def predict_batches():
             path = flask.request.files["path"].read()
             files_name = os.listdir(path)
             for file in files_name:
-                if file.split(sep='.')[1] not in ['png', 'jpg', 'tiff']:
+                if len(file.split(sep='.'))>1:
+                    if file.split(sep='.')[1] not in ['png', 'jpg', 'tiff']:
+                        files_name.remove(file)
+                else:
                     files_name.remove(file)
 
             data["predictions"] = []
@@ -413,7 +416,7 @@ def predict_batches():
             data["success"] = True
 
 
-            with open('results/predictions.txt', 'w') as outfile:
+            with open('Drop_images/predictions.txt', 'w') as outfile:
                 json.dump(data, outfile)
 
 
@@ -452,7 +455,7 @@ def predict_batches():
             data["success"] = True
 
 
-            with open('results/predictions.txt', 'w') as outfile:
+            with open('Drop_images/predictions.txt', 'w') as outfile:
                 json.dump(data, outfile)
 
 
