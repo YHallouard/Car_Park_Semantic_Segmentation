@@ -17,7 +17,19 @@ bash start.sh
 ```
 docker pull yhallouard/cpss:latest
 ```
-You have to run a container this way :
+Firstly, create an empty folder.
+![40% center](README_pic/empty_folder.png)  
+Move to this folder.
+```
+mkdir project
+cd project
+```
+
+```
+$PWD
+>> -bash: /users/yannhallouard/PycharmProjects/project: is a directory
+```
+And now you can run the container:
 ```
 docker run -d -e PYTHONUNBUFFERED=1 -p 5000:5000   --name='cpss'   -v $PWD:/app/Drop_images yhallouard/cpss:latest
 ```
@@ -30,8 +42,12 @@ Obviously name, environement and port can by changed. But you have to mount a em
 
 ## How to use it ?
 
-Firstly, drop your images in the Drop_images folder.
+
+If you re-build the image because you downloaded it on github, drop your images in the Drop_images folder.
 ![40% center](README_pic/drop_images.png)  
+
+If you downloaded the image on docker, drop your images in your mounted empty folder.
+![40% center](README_pic/empty_folder.png)  
 
 ### On web browser
 Then you can access with your web browser to http://localhost:5000/.
