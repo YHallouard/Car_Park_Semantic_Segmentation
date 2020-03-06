@@ -1,5 +1,7 @@
 # Car Park Semantic Segmentation API (CPSS)
 
+Automatic detection (with machine learning algorithm) of available space for solar panels on car parking. Built with a
+front end application to load the aerial images of a parking.
 
 SSPD is a Flask rest API on a Docker container which allows you to create a wkt representation of parking on an aerial picture.
 
