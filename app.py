@@ -73,7 +73,7 @@ def load_model():
     # pre-trained on ImageNet and provided by Keras, but you can
     # substitute in your own networks just as easily)
     global model
-    #model = ResNet50(weights="imagenet")
+
     model = Deeplabv3(input_shape=(256, 256, 3),
                       classes=1,
                       weights='cityscapes',
@@ -178,7 +178,6 @@ def get():
     return {'hello': 'world'}
 
 
-
 @app.route('/predict', methods=["POST", "GET"])
 def predict():
     # initialize the data dictionary that will be returned from the
@@ -202,9 +201,8 @@ def predict():
             preds = preds.reshape(preds.shape[:3])
             data["predictions"] = []
 
-            # preds = np.zeros((224, 224))
-
-            # loop over the results and add them to the list of
+            # loop over the results a
+            # nd add them to the list of
             # returned predictions
             data["predictions"].append(preds)
 
