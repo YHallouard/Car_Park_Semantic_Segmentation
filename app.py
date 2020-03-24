@@ -19,7 +19,7 @@ from keras.callbacks import History
 from model import Deeplabv3
 import tensorflow as tf
 
-#matplotlib.use('TkAgg')
+# matplotlib.use('TkAgg')
 from matplotlib import gridspec
 from matplotlib import pyplot as plt
 from flask import Flask
@@ -36,13 +36,14 @@ import os
 import UMask.UMask as U
 
 import sys
+
 sys.stdout.flush()
 
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
-
 app = Flask(__name__)
 model = None
+
 
 # ---------------------------------------------------------------
 #                             Losses
@@ -53,17 +54,20 @@ def iou_loss(y_true, y_pred, smooth=10):
     intersection = K.sum(y_true_f * y_pred_f)
     return 1 - (intersection + smooth) / (K.sum(y_true_f) + K.sum(y_pred_f) - intersection + smooth)
 
+
 def iou_metric(y_true, y_pred, smooth=1):
     y_true_f = K.flatten(y_true)
     y_pred_f = K.flatten(y_pred)
     intersection = K.sum(y_true_f * y_pred_f)
     return (intersection + smooth) / (K.sum(y_true_f) + K.sum(y_pred_f) - intersection + smooth)
 
+
 def sym_dif(y_true, y_pred):
     y_true_f = K.flatten(y_true)
     y_pred_f = K.flatten(y_pred)
     intersection = K.sum(y_true_f * y_pred_f)
-    return K.sum(y_true_f) + K.sum(y_pred_f) - 2*intersection
+    return K.sum(y_true_f) + K.sum(y_pred_f) - 2 * intersection
+
 
 # ---------------------------------------------------------------
 #                             Model
@@ -100,6 +104,7 @@ def prepare_image(image, target):
 
     # return the processed image
     return image
+
 
 # ---------------------------------------------------------------
 #                      Image visualisation
@@ -352,7 +357,6 @@ def predict_wk():
             # indicate that the request was a success
             data["success"] = True
 
-
             with open('Drop_images/predictions.txt', 'w') as outfile:
                 json.dump(data, outfile)
 
@@ -383,8 +387,8 @@ def predict_batches():
             path = flask.request.files["path"].read()
             files_name = os.listdir(path)
             for file in files_name:
-                if len(file.split(sep='.'))>1:
-                    if file.split(sep='.')[1] not in ['png', 'jpg', 'tiff']:
+                if len(file.split(sep='.')) > 1:
+                    if file.split(sep='.')[1] not in ['png', 'jpg', 'tif']:
                         files_name.remove(file)
                 else:
                     files_name.remove(file)
@@ -404,7 +408,7 @@ def predict_batches():
                 poly = U.Mask2Poly(preds)
 
                 res = {'images': file,
-                        'poly_WKT': poly}
+                       'poly_WKT': poly}
 
                 # loop over the results and add them to the list of
                 # returned predictions
@@ -413,10 +417,8 @@ def predict_batches():
             # indicate that the request was a success
             data["success"] = True
 
-
             with open('Drop_images/predictions.txt', 'w') as outfile:
                 json.dump(data, outfile)
-
 
             # return the data dictionary as a JSON response
             return flask.jsonify(data)
@@ -452,10 +454,8 @@ def predict_batches():
             # indicate that the request was a success
             data["success"] = True
 
-
             with open('Drop_images/predictions.txt', 'w') as outfile:
                 json.dump(data, outfile)
-
 
             # return the data dictionary as a JSON response
             return flask.jsonify(data)
@@ -478,7 +478,6 @@ def plot_result():
     return flask.send_file(bytes_obj,
                            attachment_filename='plot.png',
                            mimetype='image/png')
-
 
 
 if __name__ == '__main__':
