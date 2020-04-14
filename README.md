@@ -5,6 +5,9 @@ front end application to load the aerial images of a parking.
 
 SSPD is a Flask rest API on a Docker container which allows you to create a wkt representation of parking on an aerial picture.
 
+/!\ You need to get the deeplabv3_v4.h5 file, which is a large file (over 150mb), be sure that it as been clone instead it won't work.
+
+
 ## How to install ?
 Firstly you have to clone CPSS git and move to the directory:
 ```
