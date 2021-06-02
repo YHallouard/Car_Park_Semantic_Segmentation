@@ -61,7 +61,7 @@ tensorflow-estimator==2.1.0
 termcolor==1.1.0
 tqdm==4.43.0
 -e git+https://github.com/YHallouard/UMask.git@3d77dc624520d6e1442d18f116cd35e5129d2aff#egg=UMask
-urllib3==1.25.8
+urllib3==1.26.5
 Werkzeug==1.0.0
 wrapt==1.12.0
 xmljson==0.2.0
